@@ -91,3 +91,11 @@ sys_uptime(void)
   release(&tickslock);
   return xticks;
 }
+
+uint64
+sys_get_syscall(void)
+{
+    struct proc *p = myproc();
+    return p->syscall_count;
+}
+
