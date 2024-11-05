@@ -5,6 +5,30 @@
 #include "memlayout.h"
 #include "spinlock.h"
 #include "proc.h"
+#include "sha256.h"
+
+uint64 sys_sha256(void) {
+  BYTE *input;
+  int len;
+  BYTE *output;
+
+  if (argstr(0, &input, len) < 0 || argint(1, &len) < 0 || argptr(2, (void*)&output, SHA256_BLOCK_SIZE) < 0) {
+        return -1; // Argument fetching failed
+  }
+
+  // Perform SHA-256 hashing
+  SHA256_CTX ctx;
+  sha256_init(&ctx);
+  sha256_update(&ctx, input, len);
+  sha256_final(&ctx, output);
+
+  if (copyout(myproc()->pagetable, output, output, SHA256_BLOCK_SIZE) < 0) {
+        return -1; // Copying back to user space failed
+    }
+
+
+  return 0;
+}
 
 uint64
 sys_exit(void)
