@@ -1,0 +1,405 @@
+[33m43c8d2b[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m second 2
+[33m30eca89[m first commit
+[33md5c531f[m first commit
+[33mde247db[m[33m ([m[1;31morigin/riscv[m[33m, [m[1;31morigin/HEAD[m[33m)[m menvcfg also
+[33m4060b67[m change stimecmp to 0x14d
+[33m9b9ab5e[m Remove redundant copyright, now there is a license file
+[33mdab0032[m x
+[33mf8bd2f9[m synchronize usertests and exec with util lab
+[33mc28e177[m Use BPB
+[33m44f1ffb[m assert that length of filename <= DIRSIZ
+[33m1957d3e[m x
+[33m03c36a6[m Update acks
+[33me5d80df[m x
+[33m47cdb5f[m wfi to save CPU time on Athena
+[33m4d4d066[m Thanks Taojie
+[33mc0d9f31[m Thanks Lucas Wolf
+[33m6cc3d4f[m Thanks phosphagos@github
+[33ma60bf17[m Thanks segfault@github
+[33m2714279[m Thanks Marcelo Arroyo
+[33m969f03d[m Thanks snoire@github
+[33me0c3ad4[m Fix ref file name in `user.h`
+[33m93c70ce[m Remove all files created during testing
+[33m7687b38[m Report an error when `n` is not equal to `MAXFILE`
+[33m72cb384[m Update uart.c
+[33m343d1ab[m Put parentheses around macro argument.
+[33m92e60dd[m switch from machine-mode to supervisor timer interrupts. this requires qemu version >= 7.2.
+[33m5a1a4d4[m slightly more thorough testing that one can't write invalid addresses
+[33mfe940f4[m fix user.ld to get read-only text with riscv64-linux-gnu-ld 2.41
+[33mdd2574b[m tell gcc to check printf format strings add %ld %lld %u %lu %llu %lx %llx to kernel and user printf
+[33m2b55250[m no need to check state == RUNNING in timer interrupt because interrupts are always off (i.e. a lock is held) any time the current process is not in RUNNING state.
+[33m0c32c04[m kernelvec only needs to save caller-saved registers
+[33m74c1eba[m Made va and size page aligned in mappages
+[33m0802d56[m x
+[33m4a88273[m oops. scheduler() inherits the interrupt status of the most recent process to run, so it must explicitly turn them on again. It would be better if cpu->intena were really thread->intena.
+[33mf376ad7[m scheduler()'s intr_on() is in the wrong place, reflecting the locking scheme from long ago.
+[33m348cf7f[m forkret first memory model
+[33md2b2dff[m fix copyout() to refuse to write a read-only page
+[33m989e8f2[m Remove unused PLIC_M* macros
+[33m4b46c0c[m Use O_RDONLY instead of 0
+[33m463ae0a[m handle negative arguments to sleep() a little better
+[33mf5b93ef[m Update acks 61810
+[33m3d6ce9b[m Separate tests in slow and quick.  The slow tests run xv6 out of memory, out of disk space, or test big directories.
+[33med101be[m comment the sfences
+[33m581bc4c[m sfence before enabling paging
+[33m29ce316[m Merge branch 'riscv' of g.csail.mit.edu:xv6-dev into riscv
+[33m9c1b8a4[m sfence before writing satp, as well as after
+[33mcc486dd[m Help students read this C syntax
+[33m9604783[m Merge branch 'riscv' of g.csail.mit.edu:xv6-dev into riscv
+[33m7c1810e[m tolerate running out of inodes
+[33mac8c0bb[m x
+[33m948cfbd[m Rename test to textwrite
+[33m858fc68[m Linker script makes binaries bigger; use larger disk so that usertests can run.
+[33mccb7bd1[m Merge branch 'riscv' into uvm-perm
+[33m4cd4d19[m Use simple linker script to force data segment to be page aligned
+[33m8621be8[m tolerate out of disk when creating . and .. in mkdir()
+[33mdc405cd[m don't panic if out of disk space when extending a directory.
+[33mcd6207a[m Merge branch 'riscv-killed' into riscv
+[33mbc48c2b[m Add ref to this nice page about Chapter 9's regexp matcher
+[33m2f0b4d6[m Use pp instead of np to be more consistent
+[33m2a391eb[m Make argint() and argaddr() of type void (thanks Harry Porter)
+[33m7086197[m Simplify uartputc slightly (thanks Harry Porter)
+[33m63ef3b8[m slightly better comments
+[33mf2ee869[m x
+[33m1d4c437[m Use uint64 (thanks carlclone and Harry Porter)
+[33mcef1b57[m Compile user binary to map text without W and data without X Use the flags in elf header to set vm permissions Modify pgbug() so that usertests text segment is without W Add test to check app cannot write text segment
+[33m2175c6b[m Run tests in the order in which they appear in the file
+[33m7a6d572[m Costmestic change (thanks Harry Porter)
+[33m899cc02[m Experiment with being more precise setting permissions for user pages. Growing adds R|W pages (without X).  Exec() marks the stack only R|W.
+[33m8f58cc7[m Cosmetic change (thanks Harry Porter)
+[33m62bc610[m cosmetic changes (thanks Harry Porter)
+[33mdd5a720[m cosmetic changes (thanks Harry Porter)
+[33m8bd0485[m Delete rtcdate, which is a left-over from an old lab (thanks Harry Porter)
+[33m48d1a7f[m Add USED to states (thanks Harry Porter)
+[33m4f716c8[m Use p->lock to read p->killed
+[33m429c7b7[m Use atomic store_n and load_n
+[33m975f3b3[m Clean up using killed()
+[33m4087a6e[m Read and write p->killed using atomics
+[33mb1fd093[m Merge remote-tracking branch 'g/riscv' into riscv
+[33me67cb40[m x
+[33m07cf0eb[m have sh print prompt with write, not printf, to make system call lecture a little clearer.
+[33mc908d20[m put walk() in defs.h so it's clear students can call it
+[33m143cde6[m Merge remote-tracking branch 'github/riscv' into riscv
+[33me606f95[m x
+[33mc3a17f4[m have sh print prompt with write, not printf, to make system call lecture a little clearer.
+[33m311479c[m put walk() in defs.h so it's clear students can call it
+[33m76ad8e9[m avoid user-level segfault if a process doesn't call exit()
+[33m872fa88[m tolerate running out of disk blocks
+[33m7d573ba[m Merge branch 'riscv' of g.csail.mit.edu:xv6-dev into riscv
+[33mf4b3edf[m comment nits
+[33m535f179[m nothing much
+[33m2462656[m [user/ls]: List specific device file
+[33m9f3673c[m fix 'kfree' comment in kalloc.c
+[33mc1c1626[m fix comment in mkfs.c
+[33m62d8da0[m [user/ls]: List specific device file
+[33m96da76a[m fix 'kfree' comment in kalloc.c
+[33mf33f0d8[m fix comment in mkfs.c
+[33ma2e4051[m Added missing va_end().
+[33m431e21f[m Added missing va_end().
+[33m7d8bfdc[m nothing much
+[33mdd431c4[m README: Fix formatting in acknowledgements
+[33m7c958af[m enable reading memory using gdb
+[33m27a669e[m comment nits
+[33maf9abac[m Merge branch 'riscv' of g.csail.mit.edu:xv6-dev into riscv
+[33m3abd7a1[m comment
+[33mcf0c095[m sscratch cleanup
+[33m9fc9f75[m adopt github PR98 (No need to store TRAPFRAME in sscratch register)
+[33mca6fc54[m tweak virtio comments
+[33m84fb6f3[m Merge branch 'virtio' into riscv
+[33m1b02b08[m Mark runcmd with attribute noreturn, since it doesn't return
+[33m84a1bdb[m Revert "Not treat `infinite-recursion` as error"
+[33m759bb34[m Not treat `infinite-recursion` as error
+[33mcd00a82[m port virtio_disk to virtio spec 1.0+
+[33ma1da53a[m update
+[33m8ca56e9[m memmove(dst, src, 0) leads to overflow in `while(n-- > 0)` as `n` is uint64 (thanks Matúš Jókay <matus.jokay@stuba.sk>)
+[33mbf4816c[m Delete unused code (Jude Rich <juder11@gmail.com>)
+[33m02424b1[m update
+[33ma103113[m fix ld warning: undefined symbol _entry
+[33m840aae8[m die
+[33me07ca66[m comment
+[33m19ff379[m exec() only accepts MAXARG arguments
+[33m9195142[m Assert that the size in mappages() is always positive
+[33mf55def8[m Change `inode cache` in main.c to `inode table`
+[33mdd6d5d0[m I fixed a typo in the comment.
+[33m49f1e2f[m fix a invalid printf format string
+[33m1226b09[m Remove setproc prototype
+[33mf524198[m fix comment for 'sepc'
+[33m8d4ff0b[m fix typos in user/usertest.c & kernel/log.c
+[33m9655f71[m Configure PMP at boot
+[33m6de0381[m check for alignment just once
+[33m3b3f83f[m check that there's no panic if user process tries to write >= MAXVA
+[33m08c9eda[m sync usertests
+[33m1841baa[m keep usertests.c in sync with riscv-sol-2020
+[33m077323a[m Rename icache to itable
+[33m6e3f75c[m suppress an incorrect error message in grind
+[33m231c08d[m Merge remote-tracking branch 'refs/remotes/origin/riscv' into riscv
+[33m60b63b9[m x
+[33mef97f65[m kill/status test
+[33mb4c2851[m Be principled: acquire lock first
+[33m38084bc[m proc_tree_lock -> wait_lock
+[33mba8d9f4[m don't over-lock in exit()
+[33m9599a8e[m x
+[33md7b308f[m kill/status test
+[33mb63d350[m Be principled: acquire lock first
+[33m774288e[m proc_tree_lock -> wait_lock
+[33mbc943c2[m don't over-lock in exit()
+[33m47323c9[m oops
+[33m2875069[m Frans' proc_lock.
+[33mb48ea5d[m free proc if kalloc fails
+[33m5e39253[m hopefully make writei more correct
+[33me1bb4c7[m test for closed pipe or killed on every char, not just if pipe full
+[33m329935e[m fix uart.c to work with UART_TX_BUF_SIZE == 1
+[33m13dccb0[m consolewrite does not need cons.lock -- can lead to sleep() with lock held
+[33m7dea4b9[m oops
+[33m8d4fbc6[m Frans' proc_lock.
+[33maf570f5[m free proc if kalloc fails
+[33md7c0a1b[m hopefully make writei more correct
+[33m147855e[m test for closed pipe or killed on every char, not just if pipe full
+[33m4df1a26[m fix uart.c to work with UART_TX_BUF_SIZE == 1
+[33m55ad99f[m Merge branch 'riscv' of g.csail.mit.edu:xv6-dev into riscv
+[33m286b2f3[m consolewrite does not need cons.lock -- can lead to sleep() with lock held
+[33m05a7db1[m Fix minor typos
+[33md4cecb2[m kvmmake() makes a complete kernel page table, matching Figure 3.3
+[33m21cfc97[m set riscv use-compressed-breakpoints yes
+[33m9337861[m Fix minor typos
+[33mc64aa44[m kvmmake() makes a complete kernel page table, matching Figure 3.3
+[33m806580d[m set riscv use-compressed-breakpoints yes
+[33mbebecfd[m more explicable scratch area size for machine-mode timer interrupts
+[33mc199afe[m Don't map the CLINT, since it never used in the kernel in supervisor mode
+[33mc61cc69[m eliminate virtio DMA into kernel stacks.
+[33m3092fe2[m improve virtio_disk comments; bring it closer to wording in the spec
+[33m548ffc9[m don't unpin if recovering -- the resulting negative refcnt suppresses next unpin
+[33maeaf610[m avoid deadlock by disk intr acking interrupt first, then processing ring
+[33m3c70be9[m often causes deadlock after a few minutes
+[33m6c16759[m more explicable scratch area size for machine-mode timer interrupts
+[33m0c55849[m Don't map the CLINT, since it never used in the kernel in supervisor mode
+[33ma9b3dd4[m eliminate virtio DMA into kernel stacks.
+[33m271d89a[m improve virtio_disk comments; bring it closer to wording in the spec
+[33mda002a4[m don't unpin if recovering -- the resulting negative refcnt suppresses next unpin
+[33m792d60e[m avoid deadlock by disk intr acking interrupt first, then processing ring
+[33me3672e0[m often causes deadlock after a few minutes
+[33m9c8d1e2[m Fix minor typos
+[33mf2827b2[m Clarify CLINT and PLIC acronym
+[33m8ffdfad[m Add s to many printf statements that expect it (thanks Cece Chu) Add dirtest to the list of tests
+[33m6750608[m When either_copyin/out fails, return an error from write/read
+[33m8c67f96[m better grind error messages
+[33mb9359c3[m Corrects order of UART RX/TX interrupt enable bits
+[33mb965474[m Fix minor typos
+[33mb418a34[m Merge pull request #25 from matth79/patch-1
+[33m1c4b582[m Clarify CLINT and PLIC acronym
+[33md9c7b13[m Add s to many printf statements that expect it (thanks Cece Chu) Add dirtest to the list of tests
+[33m788b4d1[m Merge branch 'riscv' of g.csail.mit.edu:xv6-dev into riscv
+[33m05074ba[m When either_copyin/out fails, return an error from write/read
+[33m6781ac0[m Corrects order of UART RX/TX interrupt enable bits
+[33m2055fe1[m better grind error messages
+[33me23d53f[m Delete doc dir because they take much space in student submissions
+[33m79899c7[m Delete doc dir because they take much space in student submissions
+[33m490f91a[m move panicked check to uart.c
+[33m748809e[m suppress write() output after panic()
+[33mde434fd[m Remove obselete ifdef that shouldn't have been there ever
+[33m0b4e78f[m fix usertests to pass all the riscv-sol-fall20 solutions.
+[33mffb2ee0[m move panicked check to uart.c
+[33mdb067d2[m suppress write() output after panic()
+[33m2ec9c6e[m Remove obselete ifdef that shouldn't have been there ever
+[33md7e5f26[m fix usertests to pass all the riscv-sol-fall20 solutions.
+[33m0bb2533[m Adjust a few prototypes to be explicit that they don't take arguments
+[33m2a4a876[m touch sbrk()-allocated memory to make sure it exists
+[33m5860dcd[m usertest for exec() out of memory recovery and fix a few exec() bugs
+[33md4d4877[m Use the major number defined in file.h.  The minor number is ignored; might as well use 0.
+[33m3c25112[m Delete some obselete stuff
+[33mefaa7b8[m Adjust a few prototypes to be explicit that they don't take arguments
+[33m59a9863[m touch sbrk()-allocated memory to make sure it exists
+[33maefa269[m usertest for exec() out of memory recovery and fix a few exec() bugs
+[33mb33574d[m Use the major number defined in file.h.  The minor number is ignored; might as well use 0.
+[33m740d363[m Delete some obselete stuff
+[33m95dad4c[m x
+[33mf2ec677[m fix a bug in the out-of-memory handling code in exec
+[33m8dc71a2[m handle another out-of-memory in fork(). the policy here is not consistent, since other calls (e.g. exec()) panic on out of memory.
+[33mbc51626[m try to handle a few of the possible out-of-memory errors in fork()
+[33ma8dd44c[m modify uvmunmap() to be in aligned pages fix a bug in fork() recovering from out of memory
+[33me283514[m pa isn't needed in the uvmunmap() loop
+[33mb154cf0[m x
+[33m4a87a0a[m fix a bug in the out-of-memory handling code in exec
+[33madee82c[m handle another out-of-memory in fork(). the policy here is not consistent, since other calls (e.g. exec()) panic on out of memory.
+[33m4c22c54[m try to handle a few of the possible out-of-memory errors in fork()
+[33m70c6fe8[m modify uvmunmap() to be in aligned pages fix a bug in fork() recovering from out of memory
+[33me1a2cd5[m Merge branch 'riscv' of g.csail.mit.edu:xv6-dev into riscv
+[33md32eac3[m pa isn't needed in the uvmunmap() loop
+[33m56e7ceb[m Update to the latest specs
+[33m315c37c[m Update to the latest specs
+[33m4689467[m copyright and 6.S081
+[33m84dcf8a[m copyright and 6.S081
+[33mfa71d7f[m Ack bug finders.
+[33m5dace67[m Typo (thanks yt <jaichenhengjie@qq.com>)
+[33m737bd3a[m Ack bug finders.
+[33m2db95f0[m Typo (thanks yt <jaichenhengjie@qq.com>)
+[33mf14aa42[m Generate initcode without compressed extensions
+[33mc248447[m update initcode to avoid using the compressed extension
+[33m9eff4b0[m Write interrupt ack register in virtio_disk_intr()
+[33mb557e7c[m Update ramdisk.c
+[33mffcb883[m Fix minor typos
+[33m96a20b0[m Generate initcode without compressed extensions
+[33m0502342[m Merge pull request #9 from d0iasm/riscv
+[33m93ca555[m Merge pull request #10 from takahirox/VirtioInterruptAck
+[33m12c131d[m Merge pull request #8 from rui314/cat-fix
+[33md28c5d9[m Merge pull request #6 from jrrk2/riscv
+[33m6b593b9[m Merge pull request #4 from 4ge32/riscv
+[33mc31d35d[m Merge branch 'riscv' into riscv
+[33md8fe177[m test string system call arguments that cross over the end of the last page.
+[33m76d6c57[m test copyinstr()'s handling of the terminating null
+[33me3b7058[m streamline copyin/copyout code in usertests fix bugs in read/write return values when there's an error
+[33ma93321c[m test pointer checking in copyin, copyout, copyinstr
+[33m1f55519[m Change tf -> trapframe in a few comments
+[33m7f35d7a[m modify each page in usertests countfree() get rid of static for walk() and freewalk()
+[33m2ae9c8e[m defines for UART register bits
+[33m0f50e95[m fix printf() in interrupts
+[33m27057bc[m interrupt-driven uart output, hopefully a nice example for teaching.
+[33m1e72d5c[m cpu->scheduler -> cpu->context to reduce confusion
+[33m5494c91[m rename p->tf to p->trapframe, for consistency with p->context
+[33m82981fa[m drop QEMUEXTRA
+[33maf9eb91[m make "echo hello > x" truncate file x.
+[33m672217a[m allow more files
+[33mb62d4d4[m more grind
+[33m897f6f3[m yet another toolchain name
+[33m6cb6764[m test string system call arguments that cross over the end of the last page.
+[33m234391b[m test copyinstr()'s handling of the terminating null
+[33m354adfd[m streamline copyin/copyout code in usertests fix bugs in read/write return values when there's an error
+[33mf01b1a8[m test pointer checking in copyin, copyout, copyinstr
+[33me4b9346[m Merge branch 'riscv' of g.csail.mit.edu:xv6-dev into riscv
+[33m8b9b799[m modify each page in usertests countfree() get rid of static for walk() and freewalk()
+[33m6c3099d[m Change tf -> trapframe in a few comments
+[33m050a696[m defines for UART register bits
+[33mdb0f092[m fix printf() in interrupts
+[33m8238640[m interrupt-driven uart output, hopefully a nice example for teaching.
+[33m3b053f5[m cpu->scheduler -> cpu->context to reduce confusion
+[33md6dad42[m rename p->tf to p->trapframe, for consistency with p->context
+[33m7a7cd1a[m drop QEMUEXTRA
+[33mf3979b7[m make "echo hello > x" truncate file x.
+[33m7a5fcb2[m Write interrupt ack register in virtio_disk_intr()
+[33m8b05265[m update initcode to avoid using the compressed extension
+[33m4cf0b09[m cat should exit normally if reading from stdin
+[33m2b040aa[m Update ramdisk.c
+[33mc98e1af[m allow more files
+[33m507028d[m more grind
+[33md1b8b19[m Merge branch 'riscv' of g.csail.mit.edu:xv6-dev into riscv
+[33m20f1dd9[m more grind
+[33m73e931f[m yet another toolchain name
+[33m16b3b63[m grind: run parallel system calls forever
+[33m028af27[m mention LRU list a bit more in comments.
+[33m9de9211[m usertests -c to repeat tests forever detect memory leaks no more "already ran user tests"
+[33me7ffb74[m fix a potential memory leak
+[33md9160fb[m nits
+[33mf2ab0eb[m Clean up linker script
+[33m90eb90b[m Fix minor typos
+[33m2821d43[m nits
+[33mf2df0fa[m Fix ulib's memmove to handle overlap when src<dst
+[33m8509784[m Add implementations of memcmp and memcpy to ulib
+[33ma52d296[m delete alarmtest from riscv
+[33m56583b1[m updated alarmtest
+[33m78f863f[m Add editorconfig
+[33md441674[m Make QEMU memory size match PHYSTOP
+[33mdeaff5d[m no buf->qnext
+[33m9ead904[m fix major validation
+[33m37df68e[m story is more complex than I thought.
+[33md175bea[m bug fix: reparent() sometimes deadlocked bug fix: exit() sometimes released a different parent lock than it acquired usertests
+[33m843ce77[m Stress copyin for the full allocated page (good for lazy lab).
+[33md940fd1[m don't leak memory if exec() arguments are invalid.
+[33m6b79ee6[m Refactor big sbrk test in smaller, easier-to-understand tests
+[33mee67dbd[m Not much: factor sbrksimple from big sbrktest
+[33m7c7ed20[m don't leak a file system block if the buf argument to write is invalid and a usertest
+[33me1a3730[m yet another sbrk() bug fix, and usertest
+[33m4de161f[m don't panic if a program frees all its memory with sbrk(). if a program sbrk()'s to a non-page-boundary, don't free that page. corresponding usertests.
+[33mca30cac[m more incorrect cast to uint
+[33m402e7b5[m fix a potential kernel crash add a regression test for it
+[33m57e40a0[m nits
+[33mba1c428[m print name at start of test
+[33m25e6803[m a comment
+[33m3f6e372[m make exec test self contained
+[33mf6a37c1[m Standarize the way tests are run and report errors Support running one test, by specifying the name as a command argument to usertests
+[33m0d01de2[m Merge branch 'riscv' of g.csail.mit.edu:xv6-dev into riscv
+[33m2df4235[m all of PTE_FLAGS
+[33mb150908[m add `-bios none' to silence qemu
+[33m036b5ed[m set architecture riscv:rv64 -- fix gdb trampoline disassembly, thanks jonathan
+[33m35010f0[m error exit status is 1
+[33m7e6c37e[m Support exit status for exit/wait One test case for returning a exit status Passes usertests, but haven't used it to simplify tests
+[33m035cca9[m Make the end variable be really at the end of bss, and delete + 4096 in freerange()
+[33me5b7fa6[m thanks to Anthony Coulter
+[33mfc337af[m fix a grep bug
+[33mc0beecc[m have echo use FD 1 for clarity
+[33m25e1131[m sfence.vma in trampoline as well
+[33m9b9e2dd[m fix sfence_vma comment
+[33m86a1d4b[m sfence_vma after satp
+[33m64b93d1[m user printf(1 -> printf(
+[33ma3f6d9f[m cow moved to xv6-riscv-fall19
+[33m92c3c02[m RISC-V port doesn't borrow this code
+[33m510bcde[m Add major/minor/mkdev Maybe apply this change to master
+[33m7241838[m Move labs into 6.828 repo. The lab text isn't dependent on specific xv6 code. Lab submission instructions etc. are likely going to be more MIT 6.828 specific.
+[33mc612d45[m validateint doesn't test something interesting on RISC-V; delete it.
+[33mb564fca[m Rationalize some constants in usertests
+[33md98ddad[m Also release buffer on failed copyout
+[33m6005ef5[m Release buffer also when copyin fails
+[33md9818b8[m 512 -> BSIZE
+[33ma825f22[m Merge remote-tracking branch 'origin/master' into riscv
+[33m82638c0[m Avoid rereading the superblock in bfree
+[33m21ad8c7[m A few now unused DOC
+[33mce565ae[m dan cross
+[33me10f797[m Merge remote-tracking branch 'origin/master' into riscv
+[33m0581c37[m Removed unused `dirlookup` argument in `create`
+[33m2501560[m Cosmetic cleanup: fsinit reads sb and calls loginit. initialize icache in main.c and don't make it disk specific; the icache is shared.  This doesn't matter since we have only one disk, but conceptually cleaner and maybe helpful to students for mount lab.
+[33ma995323[m x
+[33me61377b[m Update write up to reflect new test cases.
+[33m5498ee2[m Draft mount/umount lab as an alternative lab for fs.html
+[33me398a98[m Wrap state of disk driver in a struct so that it is easier to support several disks (e.g., in a mount lab).
+[33md96a8c5[m add alarmtest.c to the repository they don't have to modify alarmtest.c, so we can use the original version to test, to make it harder to cheat.
+[33mdeec67f[m alarm stuff
+[33mfdea265[m two notes
+[33m564d10b[m Add simple crash recovery assignment to fs lab
+[33mc5163e4[m nits
+[33m3bee885[m some XXX questions
+[33me788af9[m oops, back to alarm()
+[33m0b5c01d[m Merge branch 'riscv' of g.csail.mit.edu:xv6-dev into riscv
+[33m9110f40[m sigalarm
+[33m7510ac7[m Combine the linux mmap hw with memory-mapped files in xv6 into a separate lab
+[33m0c10cbe[m syscall lab nits
+[33m0c3125b[m Add uthread
+[33mb02ef59[m x
+[33m62ece4b[m Merge branch 'riscv-bcache' into riscv
+[33mfb8a009[m fences for starting
+[33m77da01a[m First draft of text for mmap assignment.
+[33md600026[m cut ramdisk
+[33mb70cd9e[m Import big file assignment.
+[33m9c4f62e[m x
+[33m848d190[m Track in buf if disk "owns" buffer
+[33m87183da[m An easier version of bcache assignment
+[33mf37a3e3[m Make pin/unpin explicit
+[33mf1bb53c[m The driver should free descriptors, not interrupt handler.  This avoids handler freeing descriptors before driver sees that the request has completed.
+[33m5304310[m Remove B_DIRTY Use refcnt to pin blocks into the cache Replace flags/B_VALID with a boolean field valid Use info[id].status to signal completion of disk interrupt Pass a read/write flag to virtio_disk_rw
+[33m3498038[m checkpoint
+[33m005773c[m Merge branch 'riscv' of g.csail.mit.edu:xv6-dev into riscv
+[33m47b9cfe[m separate out timer init code for clarity
+[33m1ec50c5[m xxx
+[33m33494ed[m Merge branch 'riscv' of g.csail.mit.edu:xv6-dev into riscv
+[33m2d89a10[m Merge branch 'riscv' of g.csail.mit.edu:xv6-dev into riscv
+[33m6507da7[m argptr no longer needed, since copyin checks
+[33mfe14bd1[m a thought
+[33mbdcd23e[m a bit more
+[33md82f43e[m Checkpoint start of locking lab
+[33m629faaf[m cleaner UART register interface
+[33ma33f60f[m console/uart tweaks
+[33mcf48b24[m beautify console.c
+[33m281d450[m split printf into a separate file, to make console.c more like a driver
+[33m734faa2[m Pass over lab text
+[33mcc1a303[m fetchint isn't used any more
+[33mf0987d8[m ???
+[33m8ec873b[m Checkpoint: split alarmtest exercise in two exercises
+[33mc714e3e[m machinevec -> timervec
+[33mfa2e2e3[m uservec before userret in trampoline, to match book and kernelvec
+[33m8d30e21[m Merge branch 'riscv' of g.csail.mit.edu:xv6-dev into riscv
+[33mea95a66[m trampin -> uservec trampout -> userret
+[33m0358ee9[m syscall lab/alarm
+[33m57a861b[m Checkpoint start syscall lab
+[33m808811f[m Add syscall tracing to the first xv6 lab
+[33mc0b1c23[m x
+[33m47c9721[m a few name changes in panic msg
+[33m8c12928[m First draft of first lab assignment?
+[33m4e62de6[m fix
