@@ -190,3 +190,38 @@ consoleinit(void)
   devsw[CONSOLE].read = consoleread;
   devsw[CONSOLE].write = consolewrite;
 }
+
+int console_readchar(void) {
+    int ch;
+
+    acquire(&cons.lock);  // Acquire console lock
+
+    while (cons.r == cons.w) {
+        sleep(&cons.r, &cons.lock);  // Sleep until there's input
+    }
+
+    ch = cons.buf[cons.r++ % INPUT_BUF_SIZE];  // Read character
+    release(&cons.lock);  // Release lock
+
+    return ch;
+}
+
+void read_password(char *buf, int max) {
+    int i = 0;
+    char c;
+
+    while (i < max - 1) {
+        c = console_readchar();  // Read character from console
+        if (c == '\n') {
+            break;  // Enter key ends the input
+        } else if (c == '\b' && i > 0) {
+            // Handle backspace
+            i--;
+            printf("\b \b");  // Erase last character on the screen
+        } else if (c != '\b') {
+            buf[i++] = c;
+            printf("*");  // Mask input with asterisks
+        }
+    }
+    buf[i] = '\0';  // Null-terminate the string
+}

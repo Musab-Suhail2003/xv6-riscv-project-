@@ -44,26 +44,43 @@ static const WORD k[64] = {
 
 
 int main(int argc, char* argv[]) {
-    // if (argc < 2) {
-    //     printf("Usage: sha256 <string>\n");
-    //     exit(1);
-    // }
-
+    if (argc < 2) {
+        printf("Enter string or file after SHA256 to hash! \n");
+        exit(1);
+    }
     BYTE hash[SHA256_BLOCK_SIZE];
-    SHA256_answer((const unsigned char *) argv[1], strlen(argv[1]), hash);
+
+
+    char *filename = argv[1];
+    BYTE buffer[1024];  // Adjust the buffer size as needed
+    int fd = open(filename, 0);
+	int length = read(fd, buffer, 1024);
+
+	int start = uptime();
+
+    if (fd < 0 && length < 0) {
+		printf("\nHashing input String \n");
+    	SHA256_answer((const unsigned char *) argv[1], strlen(argv[1]), hash);
+    }else{
+		printf("\nHashing input file of length %d \n", length);
+		SHA256_answer(buffer, length, hash);
+	}
+	int end = uptime();
+	
+	close(fd);
 
     printf("SHA-256 hash: ");
 
-	int x = 0;
     for (int i = 0; i < SHA256_BLOCK_SIZE; i++) {
         char byte = (const char)hash[i]; // Access each BYTE
         // Print each nibble of the BYTE
         printf("%x",byte);
-		x = i;
     }
 
-    printf("\n %d character lenght \n", x+1);
 
+	int diff = end - start;
+    printf("\nNumber of Clock interrupts: %d ticks\n", diff);
+	
     exit(0);
 }
 

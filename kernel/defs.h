@@ -21,6 +21,9 @@ void            bunpin(struct buf*);
 void            consoleinit(void);
 void            consoleintr(int);
 void            consputc(int);
+int             console_readchar(void);
+int             console_readchar(void);
+void            read_password(char *buffer, int max_length);
 
 // exec.c
 int             exec(char*, char**);
@@ -135,7 +138,7 @@ char*           strncpy(char*, const char*, int);
 
 // syscall.c
 int argptr(int n, char **pp, int size);
-int            argint(int, int*);
+void            argint(int, int*);
 int             argstr(int, char*, int);
 void            argaddr(int, uint64 *);
 int             fetchstr(uint64, char*, int);

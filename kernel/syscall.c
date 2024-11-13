@@ -6,6 +6,7 @@
 #include "proc.h"
 #include "syscall.h"
 #include "defs.h"
+#include "sha256.h"
 
 // Fetch the uint64 at addr from the current process.
 int
@@ -53,11 +54,10 @@ argraw(int n)
 }
 
 // Fetch the nth 32-bit system call argument.
-int
+void
 argint(int n, int *ip)
 {
   *ip = argraw(n);
-  return *ip;
 }
 
 // Retrieve an argument as a pointer.
@@ -78,16 +78,6 @@ argstr(int n, char *buf, int max)
   uint64 addr;
   argaddr(n, &addr);
   return fetchstr(addr, buf, max);
-}
-// argptr implemented
-int argptr(int n, char **pp, int size) {
-    uint64 addr;
-    if (argint(n, (int *)&addr) < 0)  // Get the address first
-        return -1;
-    if (addr < 0 || addr >= PGSIZE || addr + size > PGSIZE)  // Check boundaries
-        return -1;
-    *pp = (char *)addr;  // Set the output pointer
-    return 0;  // Success
 }
 
 
@@ -147,6 +137,11 @@ static uint64 (*syscalls[])(void) = {
 int get_syscall(void){
   return sys_get_syscall();
 }
+
+int sha256(char *input[], char *output[]){
+  return sys_sha256();
+}
+
 
 void
 syscall(void)

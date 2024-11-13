@@ -23,7 +23,7 @@ char* sbrk(int);
 int sleep(int);
 int uptime(void);
 int get_syscall(void);
-int sha256(char *input[], int len, char *output[]);
+int sha256(char *input[]);
 
 // ulib.c
 int stat(const char*, struct stat*);

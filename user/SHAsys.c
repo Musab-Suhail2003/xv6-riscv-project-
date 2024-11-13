@@ -1,30 +1,37 @@
 #include "kernel/types.h"
-#include "kernel/stat.h"
 #include "user/user.h"
-#include "kernel/syscall.h"
-#include "kernel/sha256.h"
 
-int main(int argc, char argv[]) {
-    // if (argc < 2) {
-    //     printf("Usage: sha256 <string>\n");
-    //     exit(1);
-    // }
+#include <time.h>
 
-    char *hash[SHA256_BLOCK_SIZE];
-    //syscall version of sha256
-    sha256(argv[1], strlen(argv[1]), hash);
+int main(int argc, char* argv[]) {
 
-    printf("SHA-256 hash: ");
-
-	int x = 0;
-    for (int i = 0; i < SHA256_BLOCK_SIZE; i++) {
-        char byte = hash[i]; // Access each BYTE
-        // Print each nibble of the BYTE
-        printf("%x",byte);
-		x = i;
+    if (argc < 2) {
+        printf("Enter string or filename after SHAsys to hash!\n");
+        exit(1);
     }
+    
+    char *filename = argv[1];
+    char *buffer[1024];  // Adjust the buffer size as needed
+    int fd = open(filename, 0);
+	int length = read(fd, *buffer, 1024);
 
-    printf("\n %d character lenght \n", x+1);
+	int start = uptime();
+
+    if (fd < 0 && length < 0) {
+        printf("\nHashing input String \n");
+    	sha256((char **)argv[1]);
+    }else{
+		printf("\nHashing input file \n");
+    	sha256(buffer);
+
+	}
+	int end = uptime();
+	
+	close(fd);
+
+
+    int diff = end - start;
+    printf("\nNumber of Clock interrupts: %d ticks\n", diff);
 
     exit(0);
 }

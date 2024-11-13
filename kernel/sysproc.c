@@ -7,28 +7,37 @@
 #include "proc.h"
 #include "sha256.h"
 
+
 uint64 sys_sha256(void) {
-  BYTE *input;
-  int len;
-  BYTE *output;
+    char input[1024];           // Declare a character array to store input
+    char output[SHA256_BLOCK_SIZE];
 
-  if (argstr(0, &input, len) < 0 || argint(1, &len) < 0 || argptr(2, (void*)&output, SHA256_BLOCK_SIZE) < 0) {
+    // Fetch arguments from the user space
+    if (argstr(0, input, sizeof(input)) < 0) {
         return -1; // Argument fetching failed
-  }
+    }
+    printf("%s \n", input);
 
-  // Perform SHA-256 hashing
-  SHA256_CTX ctx;
-  sha256_init(&ctx);
-  sha256_update(&ctx, input, len);
-  sha256_final(&ctx, output);
+    // Perform SHA-256 hash on the input
+    SHA256_answer((BYTE *)input, (BYTE *)output);
 
-  if (copyout(myproc()->pagetable, output, output, SHA256_BLOCK_SIZE) < 0) {
-        return -1; // Copying back to user space failed
+    printf("SHA-256 hash with syscall!: ");
+
+    for (int i = 0; i < SHA256_BLOCK_SIZE; i++) {
+        char byte = output[i]; // Access each BYTE
+        // Print each nibble of the BYTE
+        printf("%x",byte);
     }
 
 
-  return 0;
+    // Copy the result back to user space
+    if (copyout(myproc()->pagetable, (uint64)output, output, SHA256_BLOCK_SIZE) < 0) {
+        return -1; // Copying back to user space failed
+    }
+
+    return 0; // Success
 }
+
 
 uint64
 sys_exit(void)
