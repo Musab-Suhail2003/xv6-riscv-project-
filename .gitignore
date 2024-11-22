@@ -19,3 +19,4 @@ user/usys.S
 .dir-locals.el
 .editorconfig
 .gdbinit.tmpl-riscv
+.~lock.Documentation.docx#
