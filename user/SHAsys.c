@@ -12,13 +12,19 @@ int main(int argc, char* argv[]) {
 
     if (strcmp(argv[1], "-f") == 0) {
 		char *filename = argv[2];
-		char buffer[1024];  // Adjust the buffer size as needed
+		char buffer[2300];  // Adjust the buffer size as needed
 		int fd = open(filename, 0);
 		if(fd < 0){
 			printf("File not found\n");
 			exit(1);
 		}
-		int length = read(fd, buffer, 1024);
+		int length = read(fd, buffer, sizeof(buffer));
+
+        if (length < 0) {
+            printf("Error reading file\n");
+            exit(1);
+        }
+        if(buffer[length]=='\n'){buffer[length] = '\0';}
 
 		printf("\nHashing input file of length %d \n", length);
 		close(fd);
@@ -27,11 +33,10 @@ int main(int argc, char* argv[]) {
         diff = uptime() - start;
     }else{
 		char input[1024];  // Ensure the array is large enough
-		for (int i = 1; i < argc; i++) {
-        	strcat(input, argv[i]);
-        if (i < argc - 1) strcat(input, " ");  // Add a space between arguments
-    	}
+		gets(input, sizeof(input));
 		int len = strlen(input);
+        if(input[len-1]=='\n'){input[len-1] = '\0';}
+
 
 		printf("\nHashing input String %d\n", len);
         start = uptime();

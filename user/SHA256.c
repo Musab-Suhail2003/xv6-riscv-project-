@@ -50,46 +50,49 @@ int main(int argc, char* argv[]) {
     }
     BYTE hash[SHA256_BLOCK_SIZE];
 
-	int start = uptime();
+	int start, end;
 
     if (strcmp(argv[1], "-f") == 0) {
 		char *filename = argv[2];
-		BYTE buffer[1024];  // Adjust the buffer size as needed
+		BYTE buffer[2300];  // Adjust the buffer size as needed
 		int fd = open(filename, 0);
 		if(fd < 0){
 			printf("File not found\n");
 			exit(1);
 		}
-		int length = read(fd, buffer, 1024);
-
-		printf("\nHashing input file of length %d \n", length);
+		int length = read(fd, buffer, 2300);
 		close(fd);
+		printf("\nHashing input file of length %d \n", length);
 
-		SHA256_answer(buffer, strlen((char *)buffer), hash);
+		start = uptime();
+		SHA256_answer(buffer, length, hash);
+		end = uptime();
     }else{
-		char input[1024] = {0};  // Ensure the array is large enough
-		for (int i = 1; i < argc; i++) {
-        	strcat(input, argv[i]);
-        if (i < argc - 1) strcat(input, " ");  // Add a space between arguments
-    	}
+		char input[512] = {0};  // Ensure the array is large enough
+		gets(input, sizeof(input));
 		int len = strlen(input);
-
 
 		printf("\nHashing input String %d\n", len);
 		printf("%s \n",input);
-    	SHA256_answer((const unsigned char *) input, len, hash);
+
+		start = uptime();
+    	SHA256_answer((const unsigned char *) input, len-1, hash);
+		end = uptime();
 	}
-	int end = uptime();
 	
 
 
     printf("SHA-256 hash: ");
 
     for (int i = 0; i < SHA256_BLOCK_SIZE; i++) {
-        char byte = (const char)hash[i]; // Access each BYTE
-        // Print each nibble of the BYTE
-        printf("%x",byte);
-    }
+		unsigned char byte = hash[i];  // Access each byte
+
+		// Print the high nibble
+		printf("%x", byte >> 4);  // Shift right by 4 bits and print the upper nibble
+
+		// Print the low nibble
+		printf("%x", byte & 0xF);  // Mask with 0xF to get the lower nibble
+	}
 
 
 	int diff = end - start;

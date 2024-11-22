@@ -9,7 +9,7 @@
 
 
 uint64 sys_sha256(void) {
-    char input[1024];           // Declare a character array to store input
+    char input[2300];           // Declare a character array to store input
     char output[SHA256_BLOCK_SIZE];
 
     // Fetch arguments from the user space
@@ -32,7 +32,6 @@ uint64 sys_sha256(void) {
 
     // Copy the result back to user space
     if (copyout(myproc()->pagetable, (uint64)output, output, SHA256_BLOCK_SIZE) < 0) {
-        printf("\nCopying back to user space failed\n");
         return -1; // Copying back to user space failed
     }
 
