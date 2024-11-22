@@ -25,47 +25,27 @@ int strcmp(const char *s1, const char *s2) {
 
 void kernel_password_check(void) {
     BYTE input[] = "HELLO THIS IS MUSAB SUHAIL. TODAY WE WILL BE TESTING THE KERNEL IMPLEMENTAION FOR SHA256 IN XV6 RISCV. RECENTLY XV6 SWITCHED TO RISCV PRESUMABLY BECAUSE OF ITS FOS NATURE";
-    BYTE pass[] = PASSWORD;
     BYTE output[SHA256_BLOCK_SIZE];
 
-    int attempts = 0;
+    printf("Hashing buffer of size: %d", strlen((char *)input));
 
-    while (attempts < 3) {
-        printf("Enter password: ");
-        uint64 start = r_time();
-        SHA256_answer(input, output);
+    uint64 start = r_time();
+    SHA256_answer(input, strlen((char *)input), output);
+    uint64 end = r_time();
 
-        if (strcmp((char *)output, (char *)pass) == 0) {
-             for (int i = 0; i < SHA256_BLOCK_SIZE; i++) {
-                  unsigned char byte = output[i];  // Access each byte
 
+    for (int i = 0; i < SHA256_BLOCK_SIZE; i++) {
+      unsigned char byte = output[i];  // Access each byte
                   // Print the high nibble
-                  printf("%x", byte >> 4);  // Shift right by 4 bits and print the upper nibble
+      printf("%x", byte >> 4);  // Shift right by 4 bits and print the upper nibble
 
                   // Print the low nibble
-                  printf("%x", byte & 0xF);  // Mask with 0xF to get the lower nibble
-            }
-            uint64 end = r_time();
-
-            printf("\nAccess granted.\n");
-            int diff = (int)((end - start)/100);
-            printf("\nCompleted with microseconds: %d\n", diff);
-            return;  // Correct password, proceed to shell
-        } else {
-            
-
-            printf("\nIncorrect password.\n");
-            attempts++;
-        }
-
+      printf("%x", byte & 0xF);  // Mask with 0xF to get the lower nibble
     }
 
-    // Failed login, halt the system
-    printf("Too many failed attempts. System locked.\n");
-    for (;;) {
-        // Infinite loop to prevent further access
-        asm volatile("wfi");
-    }
+    printf("\nhash completed.\n");
+    int diff = (int)((end - start)/100);
+    printf("Completed with microseconds: %d\n", diff);
 }
 
 volatile static int started = 0;

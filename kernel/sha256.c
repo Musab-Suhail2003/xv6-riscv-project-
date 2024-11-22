@@ -158,8 +158,7 @@ void sha256_final(SHA256_CTX *ctx, BYTE hash[])
 	}
 }
 
-void SHA256_answer(const BYTE* data, BYTE hash[]) {
-	uint len = strlen((const char *)data);
+void SHA256_answer(const BYTE* data, uint len ,BYTE hash[]) {
     SHA256_CTX ctx;
     sha256_init(&ctx);
     sha256_update(&ctx, data, len);

@@ -19,14 +19,13 @@ uint64 sys_sha256(void) {
     int rt = 0;
 
     argint(1, &rt);
-    printf("%d \n", rt);
     // Fetch arguments from the user space
     if (argstr(0, input, sizeof(input)) < 0) {
         return -1; // Argument fetching failed
     }
 
     // Perform SHA-256 hash on the input
-    SHA256_answer((BYTE *)input, (BYTE *)output);
+    SHA256_answer((BYTE *)input, strlen(input), (BYTE *)output);
 
     int diff = (int)((r_time() - rt)/100);
     printf("\nCompleted with microseconds: %d\n", diff);
