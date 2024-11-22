@@ -7,33 +7,42 @@
 #include "proc.h"
 #include "sha256.h"
 
+// kernel/sysproc.c
+
+uint64 sys_rtime(void) {
+    return r_time();  // Return the runtime of the current process
+}
 
 uint64 sys_sha256(void) {
     char input[2300];           // Declare a character array to store input
     char output[SHA256_BLOCK_SIZE];
+    int rt = 0;
 
+    argint(1, &rt);
+    printf("%d \n", rt);
     // Fetch arguments from the user space
     if (argstr(0, input, sizeof(input)) < 0) {
         return -1; // Argument fetching failed
     }
-    printf("%s \n", input);
 
     // Perform SHA-256 hash on the input
     SHA256_answer((BYTE *)input, (BYTE *)output);
 
+    int diff = (int)((r_time() - rt)/100);
+    printf("\nCompleted with microseconds: %d\n", diff);
+
     printf("SHA-256 hash with syscall!: ");
 
+
     for (int i = 0; i < SHA256_BLOCK_SIZE; i++) {
-        char byte = output[i]; // Access each BYTE
-        // Print each nibble of the BYTE
-        printf("%x",byte);
-    }
+        unsigned char byte = output[i];  // Access each byte
 
+        // Print the high nibble
+        printf("%x", byte >> 4);  // Shift right by 4 bits and print the upper nibble
 
-    // Copy the result back to user space
-    if (copyout(myproc()->pagetable, (uint64)output, output, SHA256_BLOCK_SIZE) < 0) {
-        return -1; // Copying back to user space failed
-    }
+        // Print the low nibble
+        printf("%x", byte & 0xF);  // Mask with 0xF to get the lower nibble
+	}
 
     return 0; // Success
 }

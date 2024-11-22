@@ -6,8 +6,8 @@
 #include "sha256.h"
 
 
-#define PASSWORD "2460e780bb13fe306d83a66748365b7bd55315f5ac7a485b971ae9a62a84a9f2"
-#define PASSWORD_LEN 32
+#define PASSWORD "69e833a8d352c4bec68964a5d4c9a792e0fee180d9c10ce56e5bc8e83e8e8f4b"
+#define PASSWORD_LEN 64
 
 int strcmp(const char *s1, const char *s2) {
     int i = PASSWORD_LEN;
@@ -24,22 +24,36 @@ int strcmp(const char *s1, const char *s2) {
 
 
 void kernel_password_check(void) {
-    BYTE input[] = "xv6pass";
+    BYTE input[] = "HELLO THIS IS MUSAB SUHAIL. TODAY WE WILL BE TESTING THE KERNEL IMPLEMENTAION FOR SHA256 IN XV6 RISCV. RECENTLY XV6 SWITCHED TO RISCV PRESUMABLY BECAUSE OF ITS FOS NATURE";
+    BYTE pass[] = PASSWORD;
     BYTE output[SHA256_BLOCK_SIZE];
 
     int attempts = 0;
 
     while (attempts < 3) {
         printf("Enter password: ");
-        int start = ticks;
+        uint64 start = r_time();
         SHA256_answer(input, output);
-        int end = ticks;
-        if (strcmp((char *)output, (char *)PASSWORD) == 0) {
+
+        if (strcmp((char *)output, (char *)pass) == 0) {
+             for (int i = 0; i < SHA256_BLOCK_SIZE; i++) {
+                  unsigned char byte = output[i];  // Access each byte
+
+                  // Print the high nibble
+                  printf("%x", byte >> 4);  // Shift right by 4 bits and print the upper nibble
+
+                  // Print the low nibble
+                  printf("%x", byte & 0xF);  // Mask with 0xF to get the lower nibble
+            }
+            uint64 end = r_time();
+
             printf("\nAccess granted.\n");
-            int diff = end - start;
-            printf("\nCompleted with %d ticks\n", diff);
+            int diff = (int)((end - start)/100);
+            printf("\nCompleted with microseconds: %d\n", diff);
             return;  // Correct password, proceed to shell
         } else {
+            
+
             printf("\nIncorrect password.\n");
             attempts++;
         }

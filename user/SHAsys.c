@@ -8,7 +8,7 @@ int main(int argc, char* argv[]) {
         exit(1);
     }
 
-	int start, diff;
+	int start;
 
     if (strcmp(argv[1], "-f") == 0) {
 		char *filename = argv[2];
@@ -24,13 +24,12 @@ int main(int argc, char* argv[]) {
             printf("Error reading file\n");
             exit(1);
         }
-        if(buffer[length]=='\n'){buffer[length] = '\0';}
 
 		printf("\nHashing input file of length %d \n", length);
+
 		close(fd);
-        start = uptime();
-        sha256(buffer);
-        diff = uptime() - start;
+        start =rtime();
+        sha256(buffer, start);
     }else{
 		char input[1024];  // Ensure the array is large enough
 		gets(input, sizeof(input));
@@ -38,13 +37,14 @@ int main(int argc, char* argv[]) {
         if(input[len-1]=='\n'){input[len-1] = '\0';}
 
 
-		printf("\nHashing input String %d\n", len);
-        start = uptime();
-    	sha256(input);
-        diff = uptime() - start;
+		printf("Hashing input String %d\n", len);
+
+        start = rtime();
+    	sha256(input, start);
 
 	}
-    printf("\nNumber of Clock interrupts: %d ticks\n", diff);
+    printf("\n");
+	
 	
     exit(0);
 }

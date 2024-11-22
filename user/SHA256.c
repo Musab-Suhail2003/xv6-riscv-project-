@@ -60,28 +60,30 @@ int main(int argc, char* argv[]) {
 			printf("File not found\n");
 			exit(1);
 		}
-		int length = read(fd, buffer, 2300);
-		close(fd);
+		int length = read(fd, buffer, sizeof(buffer));
+		
 		printf("\nHashing input file of length %d \n", length);
+		
+		close(fd);
 
-		start = uptime();
+		start = rtime();
 		SHA256_answer(buffer, length, hash);
-		end = uptime();
+		end = rtime();
     }else{
 		char input[512] = {0};  // Ensure the array is large enough
 		gets(input, sizeof(input));
 		int len = strlen(input);
+        if(input[len-1]=='\n'){input[len-1] = '\0';}
+
 
 		printf("\nHashing input String %d\n", len);
 		printf("%s \n",input);
 
-		start = uptime();
+		start = rtime();
     	SHA256_answer((const unsigned char *) input, len-1, hash);
-		end = uptime();
+		end = rtime();
 	}
 	
-
-
     printf("SHA-256 hash: ");
 
     for (int i = 0; i < SHA256_BLOCK_SIZE; i++) {
@@ -95,8 +97,8 @@ int main(int argc, char* argv[]) {
 	}
 
 
-	int diff = end - start;
-    printf("\nNumber of Clock interrupts: %d ticks\n", diff);
+	int diff = (int)((end - start)/100);
+    printf("\nCompleted with microseconds: %d\n", diff);
 	
     exit(0);
 }

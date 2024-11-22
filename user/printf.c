@@ -155,3 +155,13 @@ printf(const char *fmt, ...)
   va_start(ap, fmt);
   vprintf(1, fmt, ap);
 }
+void print_float(float f) {
+    int integer_part = (int)f;               // Extract integer part
+    int decimal_part = (int)((f - integer_part) * 1000); // Extract 3 decimal places
+
+    if (decimal_part < 0) {
+        decimal_part = -decimal_part; // Handle negative values
+    }
+
+    printf("%d.%03d\n", integer_part, decimal_part); // Print as "int.decimal"
+}

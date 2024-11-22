@@ -22,4 +22,4 @@
 #define SYS_close  21
 #define SYS_get_syscall 22
 #define SYS_sha256 23
-
+#define SYS_rtime 24

@@ -176,3 +176,15 @@ printfinit(void)
   initlock(&pr.lock, "pr");
   pr.locking = 1;
 }
+void print_float(float num) {
+    int whole_part = (int) num;
+    int decimal_part = (int) ((num - whole_part) * 1000000); // for 6 decimal places
+    
+    // Print whole part
+    printf("%d",whole_part);
+    
+    // Print decimal part (if non-zero)
+    if (decimal_part != 0) {
+        printf(".%d",decimal_part);
+    }
+}

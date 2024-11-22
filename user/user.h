@@ -23,7 +23,8 @@ char* sbrk(int);
 int sleep(int);
 int uptime(void);
 int get_syscall(void);
-int sha256(char *input);
+int sha256(char *input, int rtime);
+int rtime(void);
 
 // ulib.c
 int stat(const char*, struct stat*);
@@ -39,7 +40,6 @@ void* memset(void*, int, uint);
 int atoi(const char*);
 int memcmp(const void *, const void *, uint);
 void *memcpy(void *, const void *, uint);
-char* strcat(char* dest, const char* src);
 
 // umalloc.c
 void* malloc(uint);
