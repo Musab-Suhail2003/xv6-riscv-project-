@@ -50,24 +50,38 @@ int main(int argc, char* argv[]) {
     }
     BYTE hash[SHA256_BLOCK_SIZE];
 
-
-    char *filename = argv[1];
-    BYTE buffer[1024];  // Adjust the buffer size as needed
-    int fd = open(filename, 0);
-	int length = read(fd, buffer, 1024);
-
 	int start = uptime();
 
-    if (fd < 0 && length < 0) {
-		printf("\nHashing input String \n");
-    	SHA256_answer((const unsigned char *) argv[1], strlen(argv[1]), hash);
-    }else{
+    if (strcmp(argv[1], "-f") == 0) {
+		char *filename = argv[2];
+		BYTE buffer[1024];  // Adjust the buffer size as needed
+		int fd = open(filename, 0);
+		if(fd < 0){
+			printf("File not found\n");
+			exit(1);
+		}
+		int length = read(fd, buffer, 1024);
+
 		printf("\nHashing input file of length %d \n", length);
-		SHA256_answer(buffer, length, hash);
+		close(fd);
+
+		SHA256_answer(buffer, strlen((char *)buffer), hash);
+    }else{
+		char input[1024] = {0};  // Ensure the array is large enough
+		for (int i = 1; i < argc; i++) {
+        	strcat(input, argv[i]);
+        if (i < argc - 1) strcat(input, " ");  // Add a space between arguments
+    	}
+		int len = strlen(input);
+
+
+		printf("\nHashing input String %d\n", len);
+		printf("%s \n",input);
+    	SHA256_answer((const unsigned char *) input, len, hash);
 	}
 	int end = uptime();
 	
-	close(fd);
+
 
     printf("SHA-256 hash: ");
 
@@ -83,7 +97,6 @@ int main(int argc, char* argv[]) {
 	
     exit(0);
 }
-
 /*********************** FUNCTION DEFINITIONS ***********************/
 void sha256_transform(SHA256_CTX *ctx, const BYTE data[])
 {

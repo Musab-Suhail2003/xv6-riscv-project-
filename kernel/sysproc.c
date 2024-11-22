@@ -32,6 +32,7 @@ uint64 sys_sha256(void) {
 
     // Copy the result back to user space
     if (copyout(myproc()->pagetable, (uint64)output, output, SHA256_BLOCK_SIZE) < 0) {
+        printf("\nCopying back to user space failed\n");
         return -1; // Copying back to user space failed
     }
 

@@ -138,10 +138,6 @@ int get_syscall(void){
   return sys_get_syscall();
 }
 
-int sha256(char *input[], char *output[]){
-  return sys_sha256();
-}
-
 
 void
 syscall(void)

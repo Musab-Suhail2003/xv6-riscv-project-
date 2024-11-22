@@ -145,3 +145,26 @@ memcpy(void *dst, const void *src, uint n)
 {
   return memmove(dst, src, n);
 }
+
+
+
+char* strcat(char* dest, const char* src) {
+    char* d = dest;
+
+    // Move pointer to the end of dest
+    while (*d) {
+        d++;
+    }
+
+    // Append characters from src to dest
+    while (*src) {
+        *d = *src;
+        d++;
+        src++;
+    }
+
+    // Null-terminate the resulting string
+    *d = '\0';
+
+    return dest;
+}
