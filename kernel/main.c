@@ -5,29 +5,11 @@
 #include "defs.h"
 #include "sha256.h"
 
-
-#define PASSWORD "69e833a8d352c4bec68964a5d4c9a792e0fee180d9c10ce56e5bc8e83e8e8f4b"
-#define PASSWORD_LEN 64
-
-int strcmp(const char *s1, const char *s2) {
-    int i = PASSWORD_LEN;
-    while (i > 0) {
-        s1++;
-        s2++;
-        if(*s1 && (*s1 == *s2)) 
-            break;
-        i--;
-    }
-    return *(unsigned char *)s1 - *(unsigned char *)s2;
-}
-
-
-
 void kernel_password_check(void) {
-    BYTE input[] = "HELLO THIS IS MUSAB SUHAIL. TODAY WE WILL BE TESTING THE KERNEL IMPLEMENTAION FOR SHA256 IN XV6 RISCV. RECENTLY XV6 SWITCHED TO RISCV PRESUMABLY BECAUSE OF ITS FOS NATURE";
+    BYTE input[] = "HELLO THIS IS MUSAB SUHAIL. TODAY WE WILL BE TESTING THE KERNEL IMPLEMENTAION FOR SHA256 IN XV6 RISCV. RECENTLY XV6 SWITCHED TO RISCV PRESUMABLY BECAUSE OF ITS FOS NATURE HELLO THIS IS MUSAB SUHAIL. TODAY WE WILL BE TESTING THE KERNEL IMPLEMENTAION FOR SHA256 IN XV6 RISCV. MUSAB SUHAIL.";
     BYTE output[SHA256_BLOCK_SIZE];
 
-    printf("Hashing buffer of size: %d", strlen((char *)input));
+    printf("Hashing buffer of size: %d\n", strlen((char *)input));
 
     uint64 start = r_time();
     SHA256_answer(input, strlen((char *)input), output);
