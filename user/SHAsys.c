@@ -28,6 +28,7 @@ int main(int argc, char* argv[]) {
 		printf("\nHashing input file of length %d \n", length);
 
 		close(fd);
+		
         start =rtime();
         sha256(buffer, start);
     }else{

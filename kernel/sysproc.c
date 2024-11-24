@@ -23,7 +23,6 @@ uint64 sys_sha256(void) {
     if (argstr(0, input, sizeof(input)) < 0) {
         return -1; // Argument fetching failed
     }
-
     // Perform SHA-256 hash on the input
     SHA256_answer((BYTE *)input, strlen(input), (BYTE *)output);
 
@@ -31,7 +30,6 @@ uint64 sys_sha256(void) {
     printf("\nCompleted with microseconds: %d\n", diff);
 
     printf("SHA-256 hash with syscall!: ");
-
 
     for (int i = 0; i < SHA256_BLOCK_SIZE; i++) {
         unsigned char byte = output[i];  // Access each byte
@@ -42,7 +40,6 @@ uint64 sys_sha256(void) {
         // Print the low nibble
         printf("%x", byte & 0xF);  // Mask with 0xF to get the lower nibble
 	}
-
     return 0; // Success
 }
 

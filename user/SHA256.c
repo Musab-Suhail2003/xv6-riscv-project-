@@ -49,7 +49,6 @@ int main(int argc, char* argv[]) {
         exit(1);
     }
     BYTE hash[SHA256_BLOCK_SIZE];
-
 	int start, end;
 
     if (strcmp(argv[1], "-f") == 0) {
@@ -61,11 +60,8 @@ int main(int argc, char* argv[]) {
 			exit(1);
 		}
 		int length = read(fd, buffer, sizeof(buffer));
-		
 		printf("\nHashing input file of length %d \n", length);
-		
 		close(fd);
-
 		start = rtime();
 		SHA256_answer(buffer, length, hash);
 		end = rtime();
@@ -74,32 +70,23 @@ int main(int argc, char* argv[]) {
 		gets(input, sizeof(input));
 		int len = strlen(input);
         if(input[len-1]=='\n'){input[len-1] = '\0';}
-
-
 		printf("\nHashing input String %d\n", len);
 		printf("%s \n",input);
-
 		start = rtime();
     	SHA256_answer((const unsigned char *) input, len-1, hash);
 		end = rtime();
 	}
-	
     printf("SHA-256 hash: ");
 
     for (int i = 0; i < SHA256_BLOCK_SIZE; i++) {
 		unsigned char byte = hash[i];  // Access each byte
-
 		// Print the high nibble
 		printf("%x", byte >> 4);  // Shift right by 4 bits and print the upper nibble
-
 		// Print the low nibble
 		printf("%x", byte & 0xF);  // Mask with 0xF to get the lower nibble
 	}
-
-
 	int diff = (int)((end - start)/100);
     printf("\nCompleted with microseconds: %d\n", diff);
-	
     exit(0);
 }
 /*********************** FUNCTION DEFINITIONS ***********************/
